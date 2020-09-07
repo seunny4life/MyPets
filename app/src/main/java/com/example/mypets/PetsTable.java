@@ -14,7 +14,6 @@ import java.util.List;
 
 public final class PetsTable extends SQLiteOpenHelper {
 
-    private ContentValues contentValues;
 
     private SQLiteDatabase insertData, updateData, deleteData, db;
 
@@ -62,17 +61,18 @@ public final class PetsTable extends SQLiteOpenHelper {
     //Insert Data
     // Gets the data repository in write mode
     public long insertDatabase(String name, String breed, int gender, double measurement) {
+        ContentValues contentValues;
         contentValues = new ContentValues();
         insertData = this.getWritableDatabase();
 
-// Create a new map of values, where column names are the keys
+        // Create a new map of values, where column names are the keys
         contentValues.put(COL_NAME, name);
         contentValues.put(COL_BREED, breed);
         contentValues.put(COL_GENDER, gender);
         contentValues.put(COL_MEASUREMENT, measurement);
 
 
-// Insert the new row, returning the primary key value of the new row
+        // Insert the new row, returning the primary key value of the new row
         long inserted = insertData.insert(TABLE_NAME, null, contentValues);
 
         insertData.close();
@@ -99,10 +99,11 @@ public final class PetsTable extends SQLiteOpenHelper {
     //TO DISPLAY ALL THE INFORMATION ON THE MAIN PAGE OF OUR APP
     public List<Pets> getAllData() {
 
-        db = this.getReadableDatabase();
+        db = this.getWritableDatabase();
 
         List<Pets> pets = new ArrayList<>();
 
+        //SElect from all query
         String selectAll = " SELECT * FROM " + TABLE_NAME +
                 " ORDER BY " + COL_NAME;
 
@@ -128,6 +129,8 @@ public final class PetsTable extends SQLiteOpenHelper {
 
     //Update Data
     public long updateData(int id, String name, String breed, String gender, String measurement) {
+
+        ContentValues contentValues;
 
         updateData = this.getWritableDatabase();
 

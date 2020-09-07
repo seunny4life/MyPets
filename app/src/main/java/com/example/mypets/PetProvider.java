@@ -78,43 +78,44 @@ public class PetProvider extends ContentProvider {
         return true;
     }
 
-    /**
-     * Perform the query for the given URI. Use the given projection, selection, selection arguments, and sort order.
-     */
-    @Override
-    public Cursor query(Uri uri, String[] projection,
-                        String selection, String[] selectionArgs,
-                        String sortOrder) {
 
-        //sqLiteDatabase = petsTable.getReadableDatabase();
-        Cursor cursor;
+        /**
+         * Perform the query for the given URI. Use the given projection, selection, selection arguments, and sort order.
+         */
+        @Override
+        public Cursor query (Uri uri, String[]projection,
+                String selection, String[]selectionArgs,
+                String sortOrder){
 
-        int match = sUriMatcher.match(uri);
+            //sqLiteDatabase = petsTable.getReadableDatabase();
+            Cursor cursor;
 
-        switch (match) {
-            case PETS:
-                cursor = sqLiteDatabase.query(TABLE_NAME, projection, selection,
-                        selectionArgs, null, null, null);
-                cursor.setNotificationUri(getContext().getContentResolver(), uri);
-                break;
-            case PETS_ID:
-                projection = new String[]{COL_NAME};
-                selection = COL_ID + "=?";
-                selectionArgs = new String[]{String.valueOf(uri)};
-                cursor = sqLiteDatabase.query(TABLE_NAME, projection, selection,
-                        selectionArgs, null, null, null);
-                cursor.setNotificationUri(getContext().getContentResolver(), uri);
+            int match = sUriMatcher.match(uri);
 
-                break;
-            default:
-                throw new IllegalArgumentException("Cannot query unknown URI " + uri);
+            switch (match) {
+                case PETS:
+                    cursor = sqLiteDatabase.query(TABLE_NAME, projection, selection,
+                            selectionArgs, null, null, null);
+                    cursor.setNotificationUri(getContext().getContentResolver(), uri);
+                    break;
+                case PETS_ID:
+                    projection = new String[]{COL_NAME};
+                    selection = COL_ID + "=?";
+                    selectionArgs = new String[]{String.valueOf(uri)};
+                    cursor = sqLiteDatabase.query(TABLE_NAME, projection, selection,
+                            selectionArgs, null, null, null);
+                    cursor.setNotificationUri(getContext().getContentResolver(), uri);
+
+                    break;
+                default:
+                    throw new IllegalArgumentException("Cannot query unknown URI " + uri);
+
+            }
+            cursor.close();
+
+            return cursor;
 
         }
-        cursor.close();
-
-        return cursor;
-
-    }
 
     /**
      * Insert new data into the provider with the given ContentValues.

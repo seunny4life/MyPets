@@ -56,15 +56,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void displayInformation() {
-        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewShow);
 
         petsTable = new PetsTable(this);
 
-        petProvider = new PetProvider();
+        recyclerView = (RecyclerView) findViewById(R.id.recyclerViewShow);
 
         pets = new Pets();
 
+        petProvider = new PetProvider();
+
         listOfPets = new ArrayList<>();
+
+        listOfPets = petsTable.getAllData();
 
         petAdapter = new PetAdapter(this, listOfPets);
 
@@ -72,7 +75,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(layout);
 
         recyclerView.setAdapter(petAdapter);
-
 
         /*petsTable = new PetsTable(this);
         pets = new Pets();
@@ -88,9 +90,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu options from the res/menu/menu_catalog.xml file.
+        // Inflate the menu options from the res/menu/menu_main.xml file.
         // This adds menu items to the app bar.
-        getMenuInflater().inflate(R.menu.menu_catalog, menu);
+        getMenuInflater().inflate(R.menu.menu_main, menu);
         return true;
     }
 

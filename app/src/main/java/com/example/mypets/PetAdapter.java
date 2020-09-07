@@ -36,7 +36,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.MyViewHolder> {
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.simple_list, parent);
+                .inflate(R.layout.simple_list, parent, false);
         return new MyViewHolder(view);
     }
 
@@ -53,7 +53,7 @@ public class PetAdapter extends RecyclerView.Adapter<PetAdapter.MyViewHolder> {
 
     @Override
     public int getItemCount() {
-        return 0;
+        return petListItem.size();
     }
 
 }

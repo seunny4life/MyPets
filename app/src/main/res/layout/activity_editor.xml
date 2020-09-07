@@ -17,7 +17,7 @@
         <!-- Label -->
         <TextView
             android:text="@string/category_overview"
-            style="@style/CategoryStyle" />
+            style="@style/AppStyle" />
 
         <!-- Input fields -->
         <LinearLayout
@@ -53,7 +53,7 @@
         <!-- Label -->
         <TextView
             android:text="@string/category_gender"
-            style="@style/CategoryStyle" />
+            style="@style/AppStyle" />
 
         <!-- Input field -->
         <LinearLayout
@@ -82,7 +82,7 @@
         <!-- Label -->
         <TextView
             android:text="@string/category_measurement"
-            style="@style/CategoryStyle" />
+            style="@style/AppStyle" />
 
         <!-- Input fields -->
         <RelativeLayout
